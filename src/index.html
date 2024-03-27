@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <title>Self Service Order</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <main id="app">
+      <form v-if="!token" @submit.prevent="checkLogin">
+        <label for="username">Username :</label><br />
+        <input id="username" v-model="username" /><br />
+
+        <label for="password">password :</label><br />
+        <input id="password" v-model="password" /><br />
+
+        <input class="button" type="submit" value="Log in" />
+      </form>
+      <product-list v-if="token" @update-prices="ToParentChild"></product-list>
+      <order-details v-if="token" :products="products"></order-details>
+    </main>
+    <script src="scripts.js"></script>
+    <script src="./components/OrderDetail.js"></script>
+    <script src="./components/ProductDetail.js"></script>
+    <script src="./components/ProductList.js"></script>
+
+    <script>
+      const mountedApp = app.mount("#app");
+    </script>
+  </body>
+</html>
